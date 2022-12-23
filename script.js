@@ -11,7 +11,15 @@ function makePageForEpisodes(episodeList) {
 
 function makeCardForEpisode(episode) {
   const div = document.createElement("div");
+  div.appendChild(makeHeadingForCard(episode));
   return div;
+}
+
+function makeHeadingForCard(episode) {
+  const cardHeading = document.createElement("div");
+  const episodeCode = `S0${episode.season}E0${episode.number}`;
+  cardHeading.innerHTML = `<span>episode.name</span> - ${episodeCode}`;
+  return cardHeading;
 }
 
 window.onload = setup;
