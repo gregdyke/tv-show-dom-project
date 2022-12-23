@@ -12,6 +12,15 @@ function makePageForEpisodes(episodeList) {
 function makeCardForEpisode(episode) {
   const div = document.createElement("div");
   div.appendChild(makeHeadingForCard(episode));
+
+  const img = document.createElement("img");
+  img.src = episode.image.medium;
+  div.appendChild(img);
+
+  const description = document.createElement("div");
+  description.innerHTML = episode.summary;
+  div.appendChild(description);
+
   return div;
 }
 
