@@ -17,9 +17,14 @@ function makeCardForEpisode(episode) {
 
 function makeHeadingForCard(episode) {
   const cardHeading = document.createElement("div");
-  const episodeCode = `S0${episode.season}E0${episode.number}`;
-  cardHeading.innerHTML = `<span>episode.name</span> - ${episodeCode}`;
+  const episodeCode = makeEpisodeCode(episode);
+  cardHeading.innerHTML = `<span>${episode.name}</span> - ${episodeCode}`;
   return cardHeading;
+}
+
+function makeEpisodeCode(episode) {
+  const pad = (num) => (num < 10) ? '0' + num : num;
+  return `S${pad(episode.season)}E${pad(episode.number)}`;
 }
 
 window.onload = setup;
