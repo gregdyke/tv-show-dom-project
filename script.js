@@ -2,11 +2,21 @@
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
+  const searchBox = document.querySelector("#search input");
+  searchBox.addEventListener('keypress', (e) => {
+    searchString = e.target.value;
+    filteredEpisodes = allEpisodes.filter(episode => searchMatch(episode, searchString));
+    makePageForEpisodes(filteredEpisodes);
+  })
+}
+
+function searchMatch(episode, searchString) {
+  return (episode.name + episode.summary).match(new RegExp(searchString,"i")) !== null;
 }
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
-  episodeList.map(makeCardForEpisode).forEach((card) => rootElem.appendChild(card));
+  rootElem.replaceChildren(...episodeList.map(makeCardForEpisode));
 }
 
 function makeCardForEpisode(episode) {

@@ -8,3 +8,11 @@ describe('Spec for level 100', () => {
     cy.get("#root").children().first().contains("Lord Eddard Stark, ruler of the North");
   });
 });
+
+describe('Spec for level 200', () => {
+  it('searches for winter', () => {
+    cy.visit('http://127.0.0.1:5500/index.html');
+    cy.get('input').type('winter')
+    cy.get("#root").children().should('have.length', 10);
+  });
+});

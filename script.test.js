@@ -35,3 +35,17 @@ describe("100: Episode code", () => {
         expect(window.makeEpisodeCode({season: 11, number: 11})).toBe("S11E11");
     });
 });
+
+describe("200: search match", () => {
+    it("matches name", () => {
+        expect(window.searchMatch({name: "abcd", summary:""}, "bc")).toBe(true);
+    });
+
+    it("matches name, case insensitive", () => {
+        expect(window.searchMatch({name: "aBcd", summary:""}, "bc")).toBe(true);
+    });
+
+    it("matches summary, case insensitive", () => {
+        expect(window.searchMatch({name: "efg", summary:"aBcd"}, "bc")).toBe(true);
+    });
+});
