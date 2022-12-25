@@ -1,12 +1,12 @@
 //You can edit ALL of the code here
 function setup() {
   const allEpisodes = getAllEpisodes();
-  makePageForEpisodes(allEpisodes);
+  makePageForEpisodes(allEpisodes, allEpisodes);
   const searchBox = document.querySelector("#search input");
-  searchBox.addEventListener('keypress', (e) => {
+  searchBox.addEventListener('keyup', (e) => {
     searchString = e.target.value;
     filteredEpisodes = allEpisodes.filter(episode => searchMatch(episode, searchString));
-    makePageForEpisodes(filteredEpisodes);
+    makePageForEpisodes(filteredEpisodes, allEpisodes);
   })
 }
 
@@ -14,9 +14,11 @@ function searchMatch(episode, searchString) {
   return (episode.name + episode.summary).match(new RegExp(searchString,"i")) !== null;
 }
 
-function makePageForEpisodes(episodeList) {
+function makePageForEpisodes(episodeList, allEpisodes) {
   const rootElem = document.getElementById("root");
   rootElem.replaceChildren(...episodeList.map(makeCardForEpisode));
+  const searchResultElem = document.getElementById("search-result");
+  searchResultElem.innerText = `Displaying ${episodeList.length}/${allEpisodes.length} episodes.`
 }
 
 function makeCardForEpisode(episode) {
